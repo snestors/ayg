@@ -1,8 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import html2canvas from 'html2canvas';
 import Barcode from 'react-barcode';
 import logo from '../assets/ISOTIPO.png'
 
+// eslint-disable-next-line react/prop-types
 const ImageGenerator = ({ vin, marca, modelo, color }) => {
   const imageRef = useRef(null);
   const [base64, setBase64] = useState("")
@@ -66,7 +67,7 @@ const ImageGenerator = ({ vin, marca, modelo, color }) => {
           <Barcode format='CODE128' margin={0} displayValue={false} value={vin} width={1.8} height={30} />
         </div>
         <div>
-          <strong>VIN:</strong> {vin}
+          <strong>IMEI:</strong> {vin}
         </div>
         <div>
           <strong>MARCA:</strong> {marca}
