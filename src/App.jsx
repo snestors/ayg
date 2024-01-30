@@ -1,27 +1,12 @@
 import { Navbar } from "flowbite-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button, Checkbox, Label, TextInput } from 'flowbite-react';
 import { Modal } from 'flowbite-react';
+import ButtonDark from "./components/btn-dark";
 
 function App() {
   const [openModal, setOpenModal] = useState(false);
-  const [theme, setTheme] = useState(() => {
-    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      return "dark";
-    }
-  });
-
-  useEffect(() => {
-    if (theme === "dark") {
-      document.querySelector("html").classList.add("dark");
-    } else {
-      document.querySelector("html").classList.remove("dark");
-    }
-  }, [theme]);
-
-  const handleChangeTheme = () => {
-    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
-  };
+ 
 
   return (
     <>
@@ -32,6 +17,8 @@ function App() {
       </Navbar.Brand>
       <Navbar.Toggle />
       <Navbar.Collapse>
+      <ButtonDark></ButtonDark>
+
         <Navbar.Link href="#" active>
           Home
         </Navbar.Link>
@@ -88,20 +75,6 @@ function App() {
         </Modal.Footer>
       </Modal>
 
-
-      <h1 className="h-screen flex justify-center items-center dark:bg-neutral-900">
-        <button
-          onClick={handleChangeTheme}
-          className="bg-slate-200 py-2 px-4 rounded hover:bg-slate-400 dark:bg-slate-950 dark:text-white dark:hover:bg-slate-900"
-        >
-          Change Theme
-        </button>
-      </h1>
-      <img className="w-10 h-10 rounded-full" src="https://placebear.com/g/200/200" alt="Rounded avatar"/>
-    <img className="w-10 h-10 rounded" src="https://placebear.com/g/200/200" alt="Default avatar"/>
-    <p>Hola aca toy
-        
-    </p>
     </>
   );
 }
