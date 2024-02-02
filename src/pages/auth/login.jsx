@@ -1,16 +1,31 @@
 import { Button, Label, Spinner, TextInput } from "flowbite-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { supabase } from "../../lib/supabase";
 import { Toast } from "flowbite-react";
 import { HiFire } from "react-icons/hi";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+
+    const navigate = useNavigate()
+    useEffect(()=>{
+      supabase.auth.onAuthStateChange((event, session) => {
+          //console.log(event, session)
+          if(session) {
+            navigate('/')
+          }
+        })
+  
+  }, [navigate])
+
+   
+
   const [showToast, setShowToast] = useState(false);
   const [message, setMessage] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-
+ 
   const handleSubmitMagicLink = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -33,7 +48,7 @@ function Login() {
             setShowToast(true);
           }
 
-          console.log(e);
+          //console.log(e);
           setLoading(false);
         });
     } catch (error) {
@@ -46,12 +61,14 @@ function Login() {
     setLoading(true);
     try {
       await supabase.auth.signInWithPassword({ email, password }).then((e) => {
+       
+
         if (e.error) {
             setMessage(e.error.message);
           setShowToast(true);
         }
 
-        console.log(e);
+        //console.log(e);
         setLoading(false);
       });
     } catch (error) {

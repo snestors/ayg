@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from "react"
 import ImageGenerator from "./thermal.jsx"
-import	{supabase} from '../lib/supabase.js'
+import	{supabase} from '../../lib/supabase.js'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
