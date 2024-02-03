@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import App from "./app.jsx";
+
 import Login from './pages/auth/login.jsx'
 import NotFound from "./pages/404.jsx";
 import Autos from "./pages/autos/index.jsx";
@@ -12,6 +12,7 @@ import Graneles from "./pages/graneles/index.jsx";
 import Administracion from "./pages/Administracion/index.jsx";
 import Sgs from "./pages/Sgs/index.jsx";
 import { AppContextProvider } from "./context/appContext.jsx";
+import App from "./App.jsx";
 
 
 const router = createBrowserRouter([

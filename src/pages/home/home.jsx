@@ -1,9 +1,14 @@
 
 
+
 function Home() {
   return (
-    <div className="dark:text-white">Lading Page</div>
+    <h1>Landing</h1>
+    
+    
   );
 }
 
 export default Home;
+
+

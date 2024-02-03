@@ -16,13 +16,14 @@ function deleteT(id) {
 
 useEffect(()=> {
     getTask()
+// eslint-disable-next-line react-hooks/exhaustive-deps
 }, [])
   return (
     <>
 
-    <div className="overflow-x-auto m-4 rounded">
+    <div className="overflow-x-auto m-4 rounded" >
       <Table>
-        <Table.Head>
+        <Table.Head className="">
           <Table.HeadCell >ID</Table.HeadCell>
           <Table.HeadCell>Tarea</Table.HeadCell>
           <Table.HeadCell>Estatus</Table.HeadCell>

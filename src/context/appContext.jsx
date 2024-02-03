@@ -11,6 +11,15 @@ export const useAppContext = () => {
 
 export const AppContextProvider = ({ children }) => {
   const [task, setTaks] = useState([]);
+  const [user, setUser] = useState(null);
+
+  const userSet = async () =>{
+    const user = await supabase.auth.getUser()
+    const userData = await supabase.from('users').select('*').eq('id', user.data.user.id)    
+    
+    setUser(userData.data[0])
+  }
+  
 
   const getTask = async () => {
     const tasks = await supabase.from("task").select("*");
@@ -42,7 +51,7 @@ export const AppContextProvider = ({ children }) => {
   } 
 
   return (
-    <AppContext.Provider value={{ task, getTask, deleteTask, createTask, updateTask }}>
+    <AppContext.Provider value={{userSet, user, task, getTask, deleteTask, createTask, updateTask }}>
       {children}
     </AppContext.Provider>
   );
