@@ -10,9 +10,9 @@ function App() {
   const { userSet } = useAppContext();
   const navigate = useNavigate();
   useEffect(() => {
-    userSet();
-
+    
     supabase.auth.onAuthStateChange((event, session) => {
+      userSet();
       //console.log(event, session);
       if (!session) {
         navigate("/Login");

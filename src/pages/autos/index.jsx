@@ -1,136 +1,50 @@
 import { Sidebar } from "flowbite-react";
-import { HiArrowSmRight, HiChartPie, HiInbox, HiShoppingBag, HiTable, HiUser, HiViewBoards } from 'react-icons/hi';
-import { useMediaQuery } from "react-responsive";
+
+//import { useMediaQuery } from "react-responsive";
+import { Outlet, useLinkClickHandler, useLocation } from "react-router-dom";
+import { FaShip } from "react-icons/fa6";
+import { FcInspection } from "react-icons/fc";
+import { RiShipFill } from "react-icons/ri";
+
 
 function Autos(){
 
-    
+   function AppNavLink(props) {
+      const location = useLocation();
+      
+
+     
+      const clickHandler = useLinkClickHandler(props.to);
+      //console.log(location)
+  
+      return (
+        <span onClick={clickHandler}>
+          <Sidebar.Item icon={props.icon} href={props.to} active={location.pathname === props.to}>
+            {props.text}
+          </Sidebar.Item>
+        </span>
+      );
+    }
+
+    //!useMediaQuery({query: '(min-width: 768px)'})*
     return(<>
     <div className="flex h- h-screen overflow-hidden">
-      <Sidebar   collapsed={!useMediaQuery({query: '(min-width: 768px)'}) }  className="h-full overflow-y-auto">
+      <Sidebar   collapsed={true }  className="h-full overflow-y-auto">
       <Sidebar.Items>
         <Sidebar.ItemGroup>
-          <Sidebar.Item href="#" icon={HiChartPie} active>
-            Dashboard
-          </Sidebar.Item>
-          <Sidebar.Item href="#" icon={HiViewBoards} label="Pro" labelColor="dark">
-            Kanban
-          </Sidebar.Item>
-          <Sidebar.Item href="#" icon={HiInbox} label="3">
-            Inbox
-          </Sidebar.Item>
-          <Sidebar.Item href="#" icon={HiUser}>
-            Users
-          </Sidebar.Item>
-          <Sidebar.Item href="#" icon={HiShoppingBag}>
-            Products
-          </Sidebar.Item>
-          <Sidebar.Item href="#" icon={HiArrowSmRight}>
-            Sign In
-          </Sidebar.Item>
-          <Sidebar.Item href="#" icon={HiTable}>
-            Sign Up
-          </Sidebar.Item>
+        <AppNavLink text={"Naves"} to={"Naves"} icon={FaShip}/>
+         <AppNavLink text={"Embarques"} to={"Embarques"} icon={RiShipFill  }/>
+         <AppNavLink text={"Inspeccion"} to={"Inspeccion"} icon={FcInspection }/>
         </Sidebar.ItemGroup>
       </Sidebar.Items>
     </Sidebar>
-    <div className="flex-1 overflow-y-auto">
+    <div className="flex-1 overflow-y-auto m-1">
 
       
-        <div className=" flex m-3 items-center justify-center h-24 rounded bg-gray-50 dark:bg-gray-800">
-    <p className="text-2xl text-gray-400 dark:text-gray-500">
-               <svg className="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                  <path stroke="currentColor" d="M9 1v16M1 9h16"/>
-               </svg>
-            </p>
-        </div>
-        <div className="flex items-center justify-center h-24 rounded bg-gray-50 dark:bg-gray-800">
-    <p className="text-2xl text-gray-400 dark:text-gray-500">
-               <svg className="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                  <path stroke="currentColor" d="M9 1v16M1 9h16"/>
-               </svg>
-            </p>
-        </div>
-        <div className="flex items-center justify-center h-24 rounded bg-gray-50 dark:bg-gray-800">
-    <p className="text-2xl text-gray-400 dark:text-gray-500">
-               <svg className="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                  <path stroke="currentColor" d="M9 1v16M1 9h16"/>
-               </svg>
-            </p>
-        </div>
-        <div className="flex items-center justify-center h-24 rounded bg-gray-50 dark:bg-gray-800">
-    <p className="text-2xl text-gray-400 dark:text-gray-500">
-               <svg className="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                  <path stroke="currentColor" d="M9 1v16M1 9h16"/>
-               </svg>
-            </p>
-        </div>
-        <div className="flex items-center justify-center h-24 rounded bg-gray-50 dark:bg-gray-800">
-    <p className="text-2xl text-gray-400 dark:text-gray-500">
-               <svg className="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                  <path stroke="currentColor" d="M9 1v16M1 9h16"/>
-               </svg>
-            </p>
-        </div>
-        <div className="flex items-center justify-center h-24 rounded bg-gray-50 dark:bg-gray-800">
-    <p className="text-2xl text-gray-400 dark:text-gray-500">
-               <svg className="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                  <path stroke="currentColor" d="M9 1v16M1 9h16"/>
-               </svg>
-            </p>
-        </div>
-        <div className="flex items-center justify-center h-24 rounded bg-gray-50 dark:bg-gray-800">
-    <p className="text-2xl text-gray-400 dark:text-gray-500">
-               <svg className="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                  <path stroke="currentColor" d="M9 1v16M1 9h16"/>
-               </svg>
-            </p>
-        </div>
-        <div className="flex items-center justify-center h-24 rounded bg-gray-50 dark:bg-gray-800">
-    <p className="text-2xl text-gray-400 dark:text-gray-500">
-               <svg className="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                  <path stroke="currentColor" d="M9 1v16M1 9h16"/>
-               </svg>
-            </p>
-        </div>
-        <div className="flex items-center justify-center h-24 rounded bg-gray-50 dark:bg-gray-800">
-    <p className="text-2xl text-gray-400 dark:text-gray-500">
-               <svg className="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                  <path stroke="currentColor" d="M9 1v16M1 9h16"/>
-               </svg>
-            </p>
-        </div>
-        <div className="flex items-center justify-center h-24 rounded bg-gray-50 dark:bg-gray-800">
-    <p className="text-2xl text-gray-400 dark:text-gray-500">
-               <svg className="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                  <path stroke="currentColor" d="M9 1v16M1 9h16"/>
-               </svg>
-            </p>
-        </div>
-        <div className="flex items-center justify-center h-24 rounded bg-gray-50 dark:bg-gray-800">
-    <p className="text-2xl text-gray-400 dark:text-gray-500">
-               <svg className="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                  <path stroke="currentColor" d="M9 1v16M1 9h16"/>
-               </svg>
-            </p>
-        </div>
-        <div className="flex items-center justify-center h-24 rounded bg-gray-50 dark:bg-gray-800">
-    <p className="text-2xl text-gray-400 dark:text-gray-500">
-               <svg className="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                  <path stroke="currentColor" d="M9 1v16M1 9h16"/>
-               </svg>
-            </p>
-        </div>
-        <div className="flex items-center justify-center h-24 rounded bg-gray-50 dark:bg-gray-800">
-    <p className="text-2xl text-gray-400 dark:text-gray-500">
-               <svg className="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                  <path stroke="currentColor" d="M9 1v16M1 9h16"/>
-               </svg>
-            </p>
-        </div>
-        </div>
+        
 
-
+      <Outlet/>
+    </div>
     </div>
     
     

@@ -13,9 +13,15 @@ import Administracion from "./pages/Administracion/index.jsx";
 import Sgs from "./pages/Sgs/index.jsx";
 import { AppContextProvider } from "./context/appContext.jsx";
 import App from "./App.jsx";
+import Naves from "./pages/autos/naves/index.jsx";
 
 
 const router = createBrowserRouter([
+  {
+    path: "/Login",
+    element: <Login/>,
+
+  },
   {
     path: "/",
     element: <App />,
@@ -27,7 +33,21 @@ const router = createBrowserRouter([
       },
       {        
         path:'Autos',
-        element: <Autos />
+        element: <Autos />,
+        children:[{
+          path:'Naves',
+          element:<Naves/>,
+          
+        },
+        {
+          path:'Embarques',
+          element: <>Embarques</>
+        },
+        {
+          path:'Inspeccion',
+          element: <>Inspecciones</>
+        }
+      ]
       },
       {        
         path:'Graneles',
@@ -47,11 +67,7 @@ const router = createBrowserRouter([
     ]
 
   },
-  {
-    path: "/Login",
-    element: <Login/>,
-
-  }
+  
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
