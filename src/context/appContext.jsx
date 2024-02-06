@@ -1,5 +1,6 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { supabase } from "../lib/supabase";
+import { useNavigate } from "react-router-dom";
 
 export const AppContext = createContext();
 
@@ -10,48 +11,53 @@ export const useAppContext = () => {
 };
 
 export const AppContextProvider = ({ children }) => {
-  const [task, setTaks] = useState([]);
   const [user, setUser] = useState(null);
+  const [openModal, setOpenModal] = useState(false);
+  const [dataModal, setDataModal] = useState(null)
 
-  const userSet = async () =>{
-    const user = await supabase.auth.getUser()
-    const userData = await supabase.from('users').select('*').eq('id', user.data.user.id)    
-    
-    setUser(userData.data[0])
-  }
-  
+ 
 
-  const getTask = async () => {
-    const tasks = await supabase.from("task").select("*");
-    setTaks(tasks.data);
-  };
+  const navigate = useNavigate();
+  useEffect(() => {
+    supabase.auth.onAuthStateChange((event, session) => {
+      userSet(session);
 
-  const deleteTask = async (id) => {
+      if (!session) {
+        navigate("/Login", { replace: true });
+      }
+    });
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const userSet = async (session) => {
     try {
-      await supabase.from("task").delete().eq("id", id);
-      getTask()
+      if (session) {
+        
+        const userData = await supabase
+          .from("users")
+          .select("*")
+          .eq("id", session.user.id);
+          
+        setUser(userData.data[0]);
+       
+      }
     } catch (error) {
       console.log(error);
     }
   };
-
-  const createTask = async (task) => {
-    try {
-      await supabase.from("task").insert({
-        taskname: task,
-      });
-      getTask();
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const updateTask = async (task) =>{
-    supabase.from('task').update().eq("id", task.id)
-  } 
 
   return (
-    <AppContext.Provider value={{userSet, user, task, getTask, deleteTask, createTask, updateTask }}>
+    <AppContext.Provider
+      value={{
+        user,
+        openModal,
+        setOpenModal,
+        setDataModal,
+        dataModal
+
+      }}
+    >
       {children}
     </AppContext.Provider>
   );

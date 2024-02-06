@@ -1,27 +1,20 @@
-import { useEffect, useState } from "react"
-import { supabase } from "../../../../lib/supabase"
-import { Table } from "flowbite-react"
+
+import { Spinner, Table } from "flowbite-react"
 import { formatearFechaHora } from "../../../../components/formatos/horadatetime"
+import { useLoaderData, useNavigation } from "react-router-dom"
+import { useAppContext } from "../../../../context/appContext"
+
 
 function ListNavesComponents(){
+    const navigate = useNavigation()    
+    const {data } = useLoaderData()
+    const naves = data
+    const { setOpenModal, setDataModal }= useAppContext()
 
-    const [naves, setNaves] = useState(null)
-    const getNaves = async () =>{
-        
-       
-
-        const result = await supabase.from('naves').select('id, nombre_nave, fecha_arribo, fecha_atraque, fin_de_operaciones, puerto(puerto, origen(origen, abrev)), rubros(rubro, categoria_rubros(categoria_rubro)) ', {count: "exact"}).order('fecha_atraque', { ascending: false })
-        setNaves(result.data)
-        console.log(result.data)
-        
-    }
-
-
-    useEffect(()=>{
-        getNaves()
-    }, [])
+    if(navigate.state === "loading") return <Spinner />
 
     return (
+        <>
         <Table hoverable={true} striped={true}>
             <Table.Head>
                 <Table.HeadCell>ID</Table.HeadCell>
@@ -38,7 +31,12 @@ function ListNavesComponents(){
             <Table.Body >
                 {
                     naves && naves.map((nave)=>(
-                        <Table.Row key={nave.id} >
+                        <Table.Row key={nave.id} onClick={()=>{
+                            console.log(nave.id)
+                            setDataModal(nave)
+                            setOpenModal(true)
+                            
+                        }}>
                     <Table.Cell>{nave.id}</Table.Cell >                    
                     <Table.Cell>{nave.nombre_nave}</Table.Cell>
                     <Table.Cell>{formatearFechaHora(nave.fecha_arribo)}</Table.Cell>
@@ -56,6 +54,9 @@ function ListNavesComponents(){
                     
             </Table.Body>
         </Table>
+        
+        </>
+
     )
 }
 
