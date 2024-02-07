@@ -30,11 +30,11 @@ function Autos() {
   //!useMediaQuery({query: '(min-width: 768px)'})*
   return (
     <>
-      <div className="flex h- h-screen overflow-hidden">
-        <Sidebar collapsed={true} className="h-full overflow-y-auto">
+      <div className="flex h-screen overflow-hidden">
+        <Sidebar collapsed={true} >
           <Sidebar.Items>
             <Sidebar.ItemGroup>
-              <AppNavLink text={"Naves"} to={"Naves"} icon={FaShip} />
+              <AppNavLink text={"Naves"} to={"/Autos"} icon={FaShip} />
               <AppNavLink
                 text={"Embarques"}
                 to={"Embarques"}

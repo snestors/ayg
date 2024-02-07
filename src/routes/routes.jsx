@@ -11,7 +11,7 @@ import Naves from "../pages/autos/naves/index.jsx";
 import { supabase } from "../lib/supabase.js";
 import { createBrowserRouter } from "react-router-dom";
 import App from "../app.jsx";
-import { getNaves } from "../lib/naves/listnaves.js";
+
 
 export const router = createBrowserRouter([
   {
@@ -29,15 +29,15 @@ export const router = createBrowserRouter([
         element: <Autos />,
         children: [
           {
-            path: "Naves",
+            index:true,            
             element: <Naves />,
-            loader: getNaves
+            
             
           },
           {
             path: "Naves/:id",
             element: <Naves />,
-            loader: getNaves
+            
             
           },
           {

@@ -3,7 +3,7 @@ import { IoSearch } from "react-icons/io5";
 import { IoMdAdd } from "react-icons/io";
 import { useState } from "react";
 import ListNavesComponents from "./components/listNaves";
-import DetalleNaveComponent from "./components/naveDetalles";
+
 
 function Naves() {
   const [search, setSearch] = useState("");
@@ -32,14 +32,15 @@ function Naves() {
       <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8 ">
         <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
           <div className="flex justify-center">
-            <div className="shadow overflow-hidden  border-b border-gray-200 sm:rounded-lg">
+            <div className="overflow-hidden  border-b sm:rounded-lg w-full">
               <ListNavesComponents></ListNavesComponents>
+              
             </div>
           </div>
         </div>
       </div>
     </Card>
-    <DetalleNaveComponent></DetalleNaveComponent>
+    
     </>
   );
 }

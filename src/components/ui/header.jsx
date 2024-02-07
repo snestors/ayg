@@ -27,7 +27,7 @@ function NavbarComponent() {
   }
 
   return (
-    <Navbar fluid rounded className=" sticky top-0 z-10 border-b-2">
+    <Navbar fluid rounded>
       
       <Navbar.Brand>
       
