@@ -13,13 +13,14 @@ function Autos() {
 
     const clickHandler = useLinkClickHandler(props.to);
     //console.log(location)
+    
 
     return (
       <span onClick={clickHandler}>
         <Sidebar.Item
           icon={props.icon}
           href={props.to}
-          active={location.pathname === props.to}
+          active={location.pathname.split('/').includes(props.to)}
         >
           {props.text}
         </Sidebar.Item>

@@ -1,75 +1,56 @@
 
-import { Button,  Datepicker, Label, Modal, TextInput } from 'flowbite-react';
-import { useAppContext } from '../../../../context/appContext';
+import { useParams } from "react-router-dom";
+import { queryNaves } from "../../../../lib/naves/nave";
+import { useEffect, useState } from "react";
+
+import LoadingCard from "../../../../components/ui/loadingCard";
+import { supabase } from "../../../../lib/supabase";
+import NaveComponent from "./naveComponent";
 
 function DetalleNaveComponent() {
+  const { id } = useParams();
+  const [nave, setNave] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  
+  const getNaves = async () => {
+    setIsLoading(true)
+    const {data, error} = await supabase.from('naves').select(queryNaves).eq('id', id)
     
-    const {openModal, setOpenModal, dataModal }= useAppContext()
-    
-    console.log(dataModal)
-    
+    setNave(data[0]);
+    setIsLoading(false);
+    if (error) {
+      console.log(error);
+    }
+  };
 
+  useEffect(() => {
+    getNaves();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-    return (
-        <>
+  return (
+    <>
+      
+
+      {/* Fila con dos columnas */}
+      <div className="flex justify-between">
+        <div className="w-1/2 p-4">
+         {
+          isLoading ? <LoadingCard/> : <NaveComponent nave={nave}/>
+         }
+        </div>
+        <div className="w-1/2 p-4">
           
-          <Modal show={openModal}  popup onClose={() => setOpenModal(false)} >
-            <Modal.Header  />
-            <Modal.Body>
-              <div className="space-y-2">
-          
-              <div>
-                  <div className="block">
-                    <Label value="Nave Descarga" />
-                  </div>
-                  <TextInput id="password" type="password" required />
-                </div>
-                <div>
-                  <div className="block">
-                    <Label htmlFor="password" value="Fecha Arribo" />
-                  </div>
-                  <Datepicker></Datepicker>
-                </div>
-                <div>
-                  <div className="block">
-                    <Label htmlFor="password" value="Fecha Atraque" />
-                  </div>
-                  <TextInput id="password" type="password" required />
-                </div>
+        <LoadingCard/>
+          </div>
+      </div>
 
-                <div>
-                  <div className="block">
-                    <Label htmlFor="password" value="Fecha Fin de Operacion" />
-                  </div>
-                  <TextInput id="password" type="password" required />
-                </div>
-                <div>
-                  <div className="block">
-                    <Label htmlFor="password" value="Estatus" />
-                  </div>
-                  <TextInput id="password" type="password" required />
-                </div>
-                <div>
-                  <div className="block">
-                    <Label htmlFor="password" value="Puerto" />
-                  </div>
-                  <TextInput id="password" type="password" required />
-                </div> <div>
-                  <div className="block">
-                    <Label htmlFor="password" value="Rubro" />
-                  </div>
-                  <TextInput id="password" type="password" required />
-                </div>
-                
-                
-                <Button></Button>
-
-              </div>
-            </Modal.Body>
-          </Modal>
-        </>
-      );
+      {/* Tercera fila de ancho completo */}
+      <div className=" p-4">
+      <LoadingCard/>
+      </div>
+    </>
+  );
 }
 
 export default DetalleNaveComponent;
-

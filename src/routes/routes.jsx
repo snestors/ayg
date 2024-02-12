@@ -11,6 +11,7 @@ import Naves from "../pages/autos/naves/index.jsx";
 import { supabase } from "../lib/supabase.js";
 import { createBrowserRouter } from "react-router-dom";
 import App from "../app.jsx";
+import DetalleNaveComponent from "../pages/autos/naves/components/naveDetalles.jsx";
 
 
 export const router = createBrowserRouter([
@@ -36,7 +37,7 @@ export const router = createBrowserRouter([
           },
           {
             path: "Naves/:id",
-            element: <Naves />,
+            element: <DetalleNaveComponent />,
             
             
           },

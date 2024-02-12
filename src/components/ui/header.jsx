@@ -16,10 +16,11 @@ function NavbarComponent() {
   function AppNavLink(props) {
     const location = useLocation();
     const clickHandler = useLinkClickHandler(props.to);
+   
 
     return (
       <span onClick={clickHandler}>
-        <Navbar.Link href={props.to} active={location.pathname === props.to}>
+        <Navbar.Link href={props.to} active={location.pathname.split('/').includes(props.text)}>
           {props.text}
         </Navbar.Link>
       </span>
