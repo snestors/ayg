@@ -6,21 +6,20 @@ import isotipoB from "../../assets/ISOTIPO- BLANCO.png";
 import { useLinkClickHandler, useLocation } from "react-router-dom";
 import { useAppContext } from "../../context/appContext";
 
+import { FaShip } from "react-icons/fa6";
+//import { FcInspection } from "react-icons/fc";
+import { RiShipFill } from "react-icons/ri";
 
 function NavbarComponent() {
-
-  
-
   const { user } = useAppContext();
 
   function AppNavLink(props) {
     const location = useLocation();
     const clickHandler = useLinkClickHandler(props.to);
-   
-
+    
     return (
       <span onClick={clickHandler}>
-        <Navbar.Link href={props.to} active={location.pathname.split('/').includes(props.text)}>
+        <Navbar.Link href={props.to} active={location.pathname === props.to}>
           {props.text}
         </Navbar.Link>
       </span>
@@ -29,9 +28,7 @@ function NavbarComponent() {
 
   return (
     <Navbar fluid rounded>
-      
       <Navbar.Brand>
-      
         <img
           src={isotipo}
           className="dark:hidden mr-3 h-9"
@@ -71,7 +68,18 @@ function NavbarComponent() {
       </div>
       <Navbar.Collapse>
         <AppNavLink to="/" text="Home" />
-        <AppNavLink to="/Autos" text="Autos" />
+        <Dropdown
+          inline
+          label={<AppNavLink to="/Autos" text="Autos" />}
+          size="sm"
+        >
+          <Dropdown.Item icon={FaShip}>
+            <AppNavLink to="Autos" text="Naves" />
+          </Dropdown.Item>
+          <Dropdown.Item icon={RiShipFill}>
+            <AppNavLink to="/Autos/Embarques" text="Embarques" />
+          </Dropdown.Item>
+        </Dropdown>
         <AppNavLink to="/Graneles" text="Graneles" />
         <AppNavLink to="/Administracion" text="Administracion" />
         <AppNavLink to="/Sgs" text="Sgs" />

@@ -15,6 +15,9 @@ export default function FormNaves(){
         
     }
     
+    const onSubmit = (data) =>{
+      console.log(data)
+    }
 
     return(<>
         <Button onClick={handleClik}>
@@ -23,10 +26,10 @@ export default function FormNaves(){
           <Modal show={isOpen} onClose={() => setIsOpen(false)}>
         <Modal.Header>Formulario Naves</Modal.Header>
         <Modal.Body>
-         <FormNavesBody></FormNavesBody>
+         <FormNavesBody onSubmit></FormNavesBody>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={() => setIsOpen(false)}>I accept</Button>
+          <Button onClick={onSubmit}>I accept</Button>
           <Button color="gray" onClick={() => setIsOpen(false)}>
             Decline
           </Button>
