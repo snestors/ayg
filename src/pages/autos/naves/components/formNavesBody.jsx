@@ -25,21 +25,13 @@ function FormNavesBody() {
     <>
       <form id="form-naves" onSubmit={onSubmit}>
         <Label>Nombre de la Nave:</Label>
-        <SearchSelect register={ {...register("nombreNave")}}/>
+        <SearchSelect register={ register}/>
           
 
 
         <br />
-        <TextInput
-          color={errors.nombre && "failure"}
-          type="text"
-          {...register("nombre", {
-
-            required: { value: true, message: "El nombre es requerido" },
-          })}
-          helperText={errors.nombre && <span>{errors.nombre.message}</span>}
-        />
-        <br />
+        
+        
 
         <Label>Fecha de Arribo:</Label>
         <br />
@@ -50,9 +42,7 @@ function FormNavesBody() {
         <br />
         <TextInput
           type="datetime-local"
-          {...register("fechaAtraque", {
-            required: true,
-          })}
+          {...register("fechaAtraque", )}
         />
         <br />
 

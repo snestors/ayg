@@ -10,7 +10,8 @@ function SearchSelectNaves({ register, initState = "" }) {
   const [resultDrop, setResultDrop] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedFromSuggestions, setSelectedFromSuggestions] = useState(false); // Nuevo estado
-
+  const [SelectedValue, setSelectedValue] = useState('')
+    console.log(SelectedValue)
   const debounceValue = useDebounce(search);
 
   const onChanges = async (search) => {
@@ -44,8 +45,9 @@ function SearchSelectNaves({ register, initState = "" }) {
 
   return (
     <div className="flex flex-col gap-1">
+        <input value={SelectedValue} {...register("idNave")}/>
       <TextInput
-      {...register}
+        
         addon={
           search && (
             <a
@@ -59,7 +61,9 @@ function SearchSelectNaves({ register, initState = "" }) {
           )
         }
         value={search}
-        onChange={(e) => setSearch(e.target.value)}
+       onChange={(e) => setSearch(e.target.value)}
+       
+       
       />
       {drop && (
         <ListGroup>
@@ -78,7 +82,7 @@ function SearchSelectNaves({ register, initState = "" }) {
                 <ListGroup.Item
                   key={result.id}
                   onClick={() => {
-                    
+                    setSelectedValue(result.id)
                     setSearch(result.nombre_nave);
                     setResultDrop([]);
                     setDrop(false);
