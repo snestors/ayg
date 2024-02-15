@@ -45,7 +45,7 @@ function SearchSelectNaves({ register, initState = "" }) {
 
   return (
     <div className="flex flex-col gap-1">
-        <input value={SelectedValue} {...register("idNave")}/>
+        <input value={SelectedValue} />
       <TextInput
         
         addon={
@@ -61,7 +61,10 @@ function SearchSelectNaves({ register, initState = "" }) {
           )
         }
         value={search}
-       onChange={(e) => setSearch(e.target.value)}
+        {...register("idNave", {onChanges: (e)=>{
+            console.log(e.target.value)
+            setSearch(e.target.value)
+        }})}
        
        
       />
