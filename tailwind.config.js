@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-import flowbite from 'flowbite/plugin'
+
 // eslint-disable-next-line no-undef
 const { nextui } = require("@nextui-org/react");
 
@@ -14,6 +14,6 @@ export default {
     extend: {},
   },
   
-  plugins: [ flowbite, nextui()],
+  plugins: [ nextui()],
 }
 

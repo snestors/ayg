@@ -1,38 +1,58 @@
 import { Label, TextInput } from "flowbite-react";
 
+
 import { useForm } from "react-hook-form";
+import SearchSelect from "../../../../components/ui/searchSelect";
 
-function FormNavesBody({onSubmit}) {
-  const { register } = useForm();
+function FormNavesBody() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    
+  } = useForm();
+  
+  
 
- 
-   
+  console.log(errors);
+  const onSubmit = handleSubmit((data) => {
+    console.log(data)
+  });
+
+  
 
   return (
     <>
-      <form onSubmit={onSubmit}>
+      <form id="form-naves" onSubmit={onSubmit}>
         <Label>Nombre de la Nave:</Label>
+        <SearchSelect register={ {...register("nombreNave")}}/>
+          
+
+
         <br />
         <TextInput
+          color={errors.nombre && "failure"}
           type="text"
-          {...register("nombre")}
-          
+          {...register("nombre", {
+
+            required: { value: true, message: "El nombre es requerido" },
+          })}
+          helperText={errors.nombre && <span>{errors.nombre.message}</span>}
         />
         <br />
 
         <Label>Fecha de Arribo:</Label>
         <br />
-        <TextInput
-          type="datetime-local"
-         
-        />
+        <TextInput type="datetime-local" {...register("fechaArribo")} />
         <br />
 
         <Label>Fecha de Atraque:</Label>
         <br />
         <TextInput
           type="datetime-local"
-         
+          {...register("fechaAtraque", {
+            required: true,
+          })}
         />
         <br />
 
@@ -40,72 +60,33 @@ function FormNavesBody({onSubmit}) {
         <br />
         <TextInput
           type="datetime-local"
-          
+          {...register("fechaFinDeOperaciones")}
         />
         <br />
 
         <Label>Estatus:</Label>
         <br />
-        <TextInput
-          type="text"
-          
-        />
+        <TextInput type="text" {...register("Estatus")} />
         <br />
 
         <Label>Puerto:</Label>
         <br />
-        <TextInput
-          type="text"
-          
-        />
+        <TextInput type="text" {...register("Puerto")} />
         <br />
 
         <Label>Origen:</Label>
         <br />
-        <TextInput
-          type="text"
-         
-        />
-        <br />
-
-        <Label>Abreviatura del Origen:</Label>
-        <br />
-        <TextInput
-          type="text"
-         
-        />
+        <TextInput type="text" {...register("Origen")} />
         <br />
 
         <Label>Rubro:</Label>
         <br />
-        <TextInput
-          type="text"
-         
-        />
-        <br />
-
-        <Label>Categoría del Rubro:</Label>
-        <br />
-        <TextInput
-          type="text"
-          
-        />
+        <TextInput type="text" {...register("Rubro")} />
         <br />
 
         <Label>Agente Naviero:</Label>
         <br />
-        <TextInput
-          type="text"
-         
-        />
-        <br />
-
-        <Label>Nombre del Usuario:</Label>
-        <br />
-        <TextInput
-          type="text"
-         
-        />
+        <TextInput type="text" {...register("AgenteNaviero")} />
         <br />
 
         <button type="submit">Registrar Detalles</button>
