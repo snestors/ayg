@@ -23,7 +23,7 @@ export default function DeleteButton({ from, id, texto }) {
 
   return (
     <>
-      <Button onClick={() => setOpenModal(true)}>
+      <Button  onClick={() => setOpenModal(true)}>
         <div className="flex gap-1 items-center">
           <FaTrashAlt /> Borrar
         </div>

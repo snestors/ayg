@@ -1,42 +1,34 @@
-
-
-
-import { IoMdAdd } from "react-icons/io";
-import { Button, Modal } from 'flowbite-react';
+import { Button, Modal } from "flowbite-react";
 
 import FormNavesBody from "./formNavesBody";
 import { useState } from "react";
-export default function FormNaves(){
+export default function FormNaves({ children, initState }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
+  console.log(initState)
 
-    
-    const [isOpen, setIsOpen] = useState(false)
+  const handleClik = () => {
+    setIsOpen(!isOpen);
+  };
 
-    const handleClik = ()=>{
-        setIsOpen(!isOpen)
-        
-        
-    }
-    
-
-
-   
-    return(<>
-        <Button onClick={handleClik}>
-            <IoMdAdd size={20} /> Agregar
-          </Button>
-          <Modal show={isOpen} onClose={() => setIsOpen(false)}>
+  return (
+    <>
+      <Button onClick={handleClik}>{children}</Button>
+      <Modal show={isOpen} onClose={() => setIsOpen(false)}>
         <Modal.Header>Formulario Naves</Modal.Header>
         <Modal.Body>
-         <FormNavesBody ></FormNavesBody>
+          <FormNavesBody setIsOpen={setIsOpen} setIsLoading={setIsLoading}></FormNavesBody>
         </Modal.Body>
         <Modal.Footer>
-          <Button type="submit" form="form-naves">I accept</Button>
-          <Button color="gray" onClick={() => setIsOpen(false)}>            Decline
+          <Button isProcessing={isLoading} type="submit" form="form-naves">
+            Guardar
+          </Button>
+          <Button color="gray" onClick={() => setIsOpen(false)}>
+            {" "}
+            Cancelar
           </Button>
         </Modal.Footer>
       </Modal>
-         
-    </>)
+    </>
+  );
 }
-
-

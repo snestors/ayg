@@ -1,11 +1,12 @@
 import {  Card, TextInput } from "flowbite-react";
 import { IoSearch } from "react-icons/io5";
-
+import { IoMdAdd } from "react-icons/io";
 import { useState } from "react";
 import ListNavesComponents from "./components/listNaves";
 import { useDebounce } from "../../../lib/hooks/debounce";
 import { Select, SelectItem } from "@nextui-org/react";
 import FormNaves from "./components/formNaves";
+import { Estatus } from "../../../lib/naves/estatus";
 
 function Naves() {
   const [search, setSearch] = useState("");
@@ -49,24 +50,18 @@ function Naves() {
                 onChange={onSelected}
                 placeholder="Selecciona un Estatus"
               >
-                <SelectItem key={"NUEVO"} value={"NUEVO"}>
-                  NUEVO
-                </SelectItem>
-                <SelectItem key={"CONFIRMADO"} value={"CONFIRMADO"}>
-                  CONFIRMADO
-                </SelectItem>
-                <SelectItem key={"OPERACION"} value={"OPERACION"}>
-                  OPERACION
-                </SelectItem>
-                <SelectItem key={"FINALIZADO"} value={"FINALIZADO"}>
-                  FINALIZADO
-                </SelectItem>
+                {Estatus.map((e)=><SelectItem key={e} value={e}>
+                {e}
+                </SelectItem>)}
+                
                 <SelectItem key={"TODOS"}>TODOS</SelectItem>
               </Select>
             </div>
           </div>
           {/* Botón de agregar */}
-          <FormNaves/>
+          <FormNaves>
+          <IoMdAdd size={20} /> Agregar
+          </FormNaves>
         </div>
 
         {/* Tabla */}

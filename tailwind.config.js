@@ -8,7 +8,9 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
     'node_modules/flowbite-react/lib/esm/**/*.js',
-    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}"],
+    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/react-tailwindcss-select/dist/index.esm.js"],
+    
     darkMode: 'class',
   theme: {
     extend: {},
