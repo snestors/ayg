@@ -21,11 +21,11 @@ function SearchSelectNaves({ register, setValue, initState = "", required = fals
     try {
       const { data } = await supabase
         .from("naves")
-        .select("*")
+        .select("nombre_nave")
         .limit(5)
-        .ilike("nombre_nave", `%${search}%`);
+        .ilike("nombre_nave", `%${search}%`);       
 
-      setResultDrop(data);
+      setResultDrop([...new Set(data.map((e)=>e.nombre_nave))]);
     } catch (error) {
       console.error("Error fetching results:", error);
       alert("Ups, un error ocurrió al buscar naves. Intenta nuevamente.");
@@ -43,6 +43,11 @@ function SearchSelectNaves({ register, setValue, initState = "", required = fals
   };
 
   useEffect(() => {
+    if(initState){
+      setSuggestion(initState.nombre_nave)
+      
+    }
+
     if (debounceValue && !selectedFromSuggestions) {
       onChanges(debounceValue);
     } else {
@@ -85,12 +90,12 @@ function SearchSelectNaves({ register, setValue, initState = "", required = fals
           {resultDrop.length > 0 &&
             resultDrop.map((result) => (
               <ListGroup.Item
-                key={result.id}
+                key={result}
                 onClick={() => {
-                  setSuggestion(result.nombre_nave)// Actualizar el valor utilizando react-hook-form
+                  setSuggestion(result)// Actualizar el valor utilizando react-hook-form
                 }}
               >
-                {result.nombre_nave}
+                {result}
               </ListGroup.Item>
             ))}
         </ListGroup>
